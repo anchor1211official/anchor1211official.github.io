@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Executive Performance Audit | Anchor 1211</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e2d9;
+    font-family: 'Georgia', serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header {
+    width: 100%;
+    background: #0a0a0a;
+    border-bottom: 1px solid #2a2520;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .logo-img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+  }
+
+  .brand-name {
+    font-family: 'Georgia', serif;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: #c9b99a;
+    text-transform: uppercase;
+  }
+
+  .header-divider {
+    width: 40px;
+    height: 1px;
+    background: #c9b99a;
+    opacity: 0.4;
+  }
+
+  .main {
+    width: 100%;
+    max-width: 680px;
+    padding: 48px 24px 80px;
+  }
+
+  .intro {
+    text-align: center;
+    margin-bottom: 52px;
+  }
+
+  .intro-eyebrow {
+    font-family: 'Georgia', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: #c9b99a;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .intro h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: normal;
+    color: #f0ebe3;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .intro h1 span {
+    color: #c9b99a;
+  }
+
+  .intro p {
+    font-size: 16px;
+    color: #9a9189;
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .progress-bar-wrap {
+    background: #1a1814;
+    border-radius: 2px;
+    height: 3px;
+    margin-bottom: 48px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: #c9b99a;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #5a5550;
+    margin-bottom: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  .section {
+    display: none;
+    animation: fadeIn 0.35s ease;
+  }
+
+  .section.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+
+  .section-number {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: #c9b99a;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-size: 22px;
+    font-weight: normal;
+    color: #f0ebe3;
+    margin-bottom: 6px;
+  }
+
+  .section-subtitle {
+    font-size: 14px;
+    color: #6a6560;
+    line-height: 1.5;
+  }
+
+  .question-block {
+    margin-bottom: 36px;
+  }
+
+  .question-text {
+    font-size: 16px;
+    color: #d4cfc8;
+    line-height: 1.55;
+    margin-bottom: 16px;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 18px;
+    border: 1px solid #2a2520;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    background: #111010;
+  }
+
+  .option:hover {
+    border-color: #c9b99a;
+    background: #161412;
+  }
+
+  .option.selected {
+    border-color: #c9b99a;
+    background: #1a1712;
+  }
+
+  .option-score {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid #3a3530;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #6a6560;
+    flex-shrink: 0;
+    transition: all 0.18s ease;
+    margin-top: 1px;
+  }
+
+  .option.selected .option-score {
+    background: #c9b99a;
+    border-color: #c9b99a;
+    color: #0a0a0a;
+  }
+
+  .option-text {
+    font-size: 14px;
+    color: #9a9189;
+    line-height: 1.5;
+  }
+
+  .option.selected .option-text {
+    color: #e8e2d9;
+  }
+
+  .section-divider {
+    border: none;
+    border-top: 1px solid #1e1c19;
+    margin: 40px 0;
+  }
+
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 48px;
+  }
+
+  .btn-back {
+    background: transparent;
+    border: 1px solid #2a2520;
+    color: #6a6560;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    letter-spacing: 0.05em;
+    transition: all 0.18s ease;
+  }
+
+  .btn-back:hover {
+    border-color: #5a5550;
+    color: #9a9189;
+  }
+
+  .btn-next {
+    background: #c9b99a;
+    border: none;
+    color: #0a0a0a;
+    padding: 14px 36px;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.18s ease;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .btn-next.enabled {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .btn-next.enabled:hover {
+    background: #ddd0b8;
+  }
+
+  .unanswered-note {
+    font-size: 12px;
+    color: #6a6560;
+    margin-top: 16px;
+    text-align: right;
+    min-height: 18px;
+  }
+
+  /* Email capture screen */
+  .email-screen {
+    text-align: center;
+  }
+
+  .email-screen h2 {
+    font-size: 28px;
+    font-weight: normal;
+    color: #f0ebe3;
+    margin-bottom: 12px;
+  }
+
+  .email-screen p {
+    font-size: 15px;
+    color: #9a9189;
+    line-height: 1.7;
+    margin-bottom: 36px;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .score-preview {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #161412;
+    border: 1px solid #2a2520;
+    border-radius: 6px;
+    padding: 16px 24px;
+    margin-bottom: 36px;
+  }
+
+  .score-preview-label {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: #6a6560;
+    text-transform: uppercase;
+  }
+
+  .score-preview-value {
+    font-size: 32px;
+    color: #c9b99a;
+  }
+
+  .score-preview-total {
+    font-size: 14px;
+    color: #5a5550;
+    margin-top: 4px;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+    text-align: left;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: #6a6560;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .form-group input {
+    width: 100%;
+    background: #111010;
+    border: 1px solid #2a2520;
+    border-radius: 4px;
+    padding: 13px 16px;
+    font-size: 15px;
+    color: #e8e2d9;
+    font-family: 'Georgia', serif;
+    transition: border-color 0.18s ease;
+    outline: none;
+  }
+
+  .form-group input:focus {
+    border-color: #c9b99a;
+  }
+
+  .form-group input::placeholder {
+    color: #3a3530;
+  }
+
+  .btn-submit {
+    width: 100%;
+    max-width: 420px;
+    background: #c9b99a;
+    border: none;
+    color: #0a0a0a;
+    padding: 16px;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: all 0.18s ease;
+    margin-top: 8px;
+  }
+
+  .btn-submit:hover {
+    background: #ddd0b8;
+  }
+
+  .privacy-note {
+    font-size: 12px;
+    color: #4a4540;
+    margin-top: 14px;
+    text-align: center;
+  }
+
+  /* Results screen */
+  .results-screen {
+    text-align: center;
+  }
+
+  .archetype-badge {
+    display: inline-block;
+    background: #161412;
+    border: 1px solid #c9b99a;
+    border-radius: 4px;
+    padding: 8px 20px;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: #c9b99a;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .results-screen h2 {
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: normal;
+    color: #f0ebe3;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .results-screen .archetype-desc {
+    font-size: 15px;
+    color: #9a9189;
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 0 auto 36px;
+  }
+
+  .score-ring-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 36px;
+  }
+
+  .score-ring {
+    position: relative;
+    width: 140px;
+    height: 140px;
+  }
+
+  .score-ring svg {
+    transform: rotate(-90deg);
+  }
+
+  .score-ring-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .score-ring-number {
+    font-size: 36px;
+    color: #c9b99a;
+    display: block;
+    line-height: 1;
+  }
+
+  .score-ring-label {
+    font-size: 11px;
+    color: #5a5550;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .category-scores {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 36px;
+    text-align: left;
+  }
+
+  .cat-score-card {
+    background: #111010;
+    border: 1px solid #2a2520;
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+
+  .cat-score-name {
+    font-size: 12px;
+    color: #6a6560;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .cat-score-bar-wrap {
+    background: #1e1c19;
+    border-radius: 2px;
+    height: 4px;
+    margin-bottom: 6px;
+    overflow: hidden;
+  }
+
+  .cat-score-bar {
+    height: 100%;
+    border-radius: 2px;
+    background: #c9b99a;
+  }
+
+  .cat-score-bar.low { background: #8B4513; }
+  .cat-score-bar.mid { background: #c9b99a; }
+  .cat-score-bar.high { background: #4a7c59; }
+
+  .cat-score-val {
+    font-size: 13px;
+    color: #9a9189;
+  }
+
+  .cta-box {
+    background: #161412;
+    border: 1px solid #2a2520;
+    border-radius: 8px;
+    padding: 32px 28px;
+    margin-bottom: 24px;
+  }
+
+  .cta-box h3 {
+    font-size: 20px;
+    font-weight: normal;
+    color: #f0ebe3;
+    margin-bottom: 10px;
+  }
+
+  .cta-box p {
+    font-size: 14px;
+    color: #6a6560;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .btn-cta {
+    display: inline-block;
+    background: #c9b99a;
+    color: #0a0a0a;
+    padding: 15px 40px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'Georgia', serif;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.18s ease;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+  }
+
+  .btn-cta:hover {
+    background: #ddd0b8;
+  }
+
+  .footer {
+    width: 100%;
+    border-top: 1px solid #1a1814;
+    padding: 24px;
+    text-align: center;
+    margin-top: auto;
+  }
+
+  .footer p {
+    font-size: 12px;
+    color: #3a3530;
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 480px) {
+    .category-scores { grid-template-columns: 1fr; }
+    .main { padding: 32px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo-container">
+    <img src="https://raw.githubusercontent.com/anchor1211official/anchor1211official.github.io/main/logo.png" alt="Anchor 1211" class="logo-img" onerror="this.style.display='none'">
+    <span class="brand-name">Anchor 1211</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- INTRO SCREEN -->
+  <div class="section active" id="screen-intro">
+    <div class="intro">
+      <p class="intro-eyebrow">Executive Performance Audit</p>
+      <h1>Find out where your body is <span>costing you performance</span></h1>
+      <p>15 questions. 3 minutes. A brutally honest look at what's draining your energy, focus, and physical edge — and what to do about it.</p>
+    </div>
+    <div style="text-align:center; margin-top: 40px;">
+      <button class="btn-next enabled" onclick="startAudit()" style="font-size:14px; padding: 16px 48px;">Begin the Audit</button>
+    </div>
+  </div>
+
+  <!-- SECTIONS 1-5 -->
+  <div class="section" id="screen-questions">
+    <div class="progress-label">
+      <span id="progress-text">Section 1 of 5</span>
+      <span id="question-count">0 of 15 answered</span>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-fill"></div>
+    </div>
+
+    <!-- SECTION 1: Energy & Recovery -->
+    <div id="cat-0" class="category-block active">
+      <div class="section-header">
+        <p class="section-number">Section 01 — Energy & Recovery</p>
+        <h2 class="section-title">How you're running — and burning out</h2>
+        <p class="section-subtitle">Rate each statement based on the last 30 days.</p>
+      </div>
+
+      <div class="question-block" data-q="0" data-cat="0">
+        <p class="question-text">My sleep quality genuinely restores me — I wake up ready to perform.</p>
+        <div class="options">
+          <div class="option" onclick="selectOption(this,0,1)"><div class="option-score">1</div><div class="option-text">Rarely. I rely on caffeine to function most mornings.</div></div>
+          <div class="option" onclick="selectOption(this,0,2)"><div class="option-score">2</div><div class="option-text">Sometimes. Hit or miss depending on the week.</div></div>
+          <div class="option" onclick="selectOption(this,0,3)"><div class="option-score">3</div><div class="option-text">Usually. I sleep decently but could be sharper.</div></div>
+          <div class="option" onclick="selectOption(this,0,4)"><div class="option-score">4</div><div class="option-text">Consistently. My recovery is a genuine strength.</div></div>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <div class="question-block" data-q="1" data-cat="0">
+        <p class="question-text">I experience energy crashes — mid-afternoon or after meals — that affect my productivity.</p>
+        <div class="options">
+          <div class="option" onclick="selectOption(this,1,1)"><div class="option-score">1</div><div class="option-text">Daily. It's affecting meetings and decision-making.</div></div>
+          <div class="option" onclick="selectOption(this,1,2)"><div class="option-score">2</div><div class="option-text">Several times a week. I've learned to work around it.</div></div>
+          <div class="option" onclick="selectOption(this,1,3)"><div class="option-score">3</div><div class="option-text">Occasionally. Usually tied to poor sleep or travel.</div></div>
+          <div class="option" onclick="selectOption(this,1,4)"><div class="option-score">4</div><div class="option-text">Rarely. My energy stays level through the day.</div></div>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <div class="question-block" data-q="2" data-cat="0">
+        <p class="question-text">My body recovers well from demanding weeks — travel, stress, poor sleep — without it compounding.</p>
+        <div class="options">
+          <div class="option" onclick="selectOption(this,2,1)"><div class="option-score">1</div><div class="option-text">No. One hard week throws me off for two.</div></div>
+          <div class="option" onclick="selectOption(this,2,2)"><div class="option-score">2</div><div class="option-text">Somewhat. I recover, but it takes longer than it should.</div></div>
+          <div class="option" onclick="selectOption(this,2,3)"><div class="option-score">3</div><div class="option-text">Usually. I bounce back without too much fallout.</div></div>
+          <div class="option" onclick="selectOption(this,2,4)"><div class="option-score">4</div><div class="option-text">Yes. My resilience is something I actively manage.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: Movement Consistency -->
+    <div id="cat-1" class="category-block" style="display:none">
+      <div class="section-header">
+        <p class="section-number">Section 02 — Movement Consistency</p>
+        <h2 class="section-title">The gap between intention and execution</h2>
+        <p class="section-subtitle">Be honest. Nobody's watching the score but you.</p>
+      </div>
+
+      <div class="question-block" data-q="3" data-cat="1">
+        <p class="question-text">My actual workout frequency matches what I tell myself I'm going to do.</p>
+        <div class="options">
+          <div class="option" onclick="selectOption(this,3,1)"><div class="option-score">1</div><div class="option-text">No. My calendar and my gym time look nothing alike.</div></div>
+          <div class="option" onclick="selectOption(this,3,2)"><div class="option-score">2</div><div class="option-text">Sometimes. I hit it when travel or work doesn't derail me.</div></div>
+          <div class="option" onclick="selectOption(this,3,3)"><div class="option-score">3</div><div class="option-text">Usually. I'm fairly consistent but still miss more than I'd like.</div></div>
+          <div class="option" onclick="selectOption(this,3,4)"><div class="option-score">4</div><div class="option-text">Yes. My training is non-negotiable regardless of schedule.</div></div>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <div class="question-block" data-q="4" data-cat="1">
+        <p class="question-text">When a work crisis hits, my fitness routine is the first thing I sacrifice.</p>
+        <div class="options">
+          <div class="option" onclick="selectOption(this,4,1)"><div class="option-score">1</div><div class="option-text">Always. It doesn't survive any significant pressure.</div></div>
+          <div class="option" onclick="selectOption(this,4,2)"><div class="option-score">2</div><div class="option-text">Usually. Work almost always wins when things stack up.</div></div>
+          <div class="option" onclick="selectOption(this,4,3)"><div class="option-score">3</div><div class="option-text">Sometimes. I find modified versions when schedules break down.</div></div>
+          <div class="option" onclick="selectOption(this,4,4)"><div class="option-score">4</div><div class="option-text">Rarely. I protect movement because I know the cost if I don't.</div></div>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <div class="question-block" data-q="5" data-cat="1">
+        <p class="question-text">I have a training approach that actually fits my life — travel schedule, time constraints, access to equipment.</p>
+        <div class="options">
+          <div class="option" onclick="selectOption(this,5,1)"><div class="option-score">1</div><div class="option-text">No. I cobble something together and it rarely sticks.</div></div>
+          <div class="option" onclick="selectOption(this,5,2)"><div class="option-score">2</div><div class="option-text">Somewhat. I have a plan but it breaks under real-life conditions.</div></div>
+          <div class="option" onclick="selectOption(this,5,3)"><div class="option-score">3</div><div class="option-text">Mostly. My system works but still has gaps when I travel.</div></div>
+          <div class="option" onclick="selectOption(this,5,4)"><div class="option-score">4</div><div class="option-text">Yes. I've built something sustainable around my actual schedule.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: Nutrition Under Pressure -->
+    <div id="cat-2" class="category-block" style="display:none">
+      <div class="section-header">
+        <p class="section-number">Section 03 — Nutrition Under Pressure</p>
+        <h2 class="section-title">What your eating looks like when life gets hard</h2>
+        <p class="section-subtitle">This isn't about perfect eating. It's about what happens when the schedule breaks.</p>
+      </div>
+
+      <div class="question-block" data-q="6" data-cat="2">
+        <p class="question-text">During high-stress weeks or travel, my nutrition stays reasonably on track.</p>
+        <div class="options">
+          <div class="option" onclick="selectOption(this,6,1)"><div class="option-score">1</div><div class="option-text">No. Stress and travel completely derail my eating.</div></div>
+          <div class="option" onclick="selectOption(this,6,2)"><div class="option-score">2</div><div class="option-text">Somewhat. I manage one or the other but not both simultaneously.</div></div>
+          <div class="option" onclick="selectOption(this,6,3)"><div class="option-score">3</div><div class="option-text">Usually. I have some defaults that get me through most weeks.</div></div>
+          <div class="option" onclick="selectOption(this,6,4)"><div class="option-score">4</div><div class="option-text">Yes. I have a system that holds even when the schedule doesn't.</div></div>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <div class="question-block" data-q="7" data-cat="2">
+        <p class="question-text">I consistently eat enough protein to support my energy, muscle, and recovery.</p>
+        <div class="options">
+          <div class="option" onclick="selectOption(this,7,1)"><div class="option-score">1</div><div class="option-text">Unlikely. I don't track it and my eating is inconsistent.</div></div>
+          <div class="option" onclick="selectOption(this,7,2)"><div class="option-score">2</div><div class="option-text">Some days. It's hit or miss depending on what's available.</div></div>
+          <div class="option" onclick="selectOption(this,7,3)"><div class="option-score">3</div><div class="option-text">Most days. I'm intentional but it's not fully dialed in.</div></div>
+          <div class="option" onclick="selectOption(this,7,4)"><div class="option-score">4</div><div class="option-text">Yes. Protein is a non-negotiable part of how I eat.</div></div>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <div class="question-block" data-q="8" data-cat="2">
+        <p class="question-text">Business meals, client dinners, and airport food don't consistently throw off my nutrition.</p>
+        <div class="options">
+          <div class="option" onclick="selectOption(this,8,1)"><div class="option-score">1</div><div class="option-text">They always derail me. I just eat whatever's there.</div></div>
+          <div class="option" onclick="selectOption(this,8,2)"><div class="option-score">2</div><div class="option-text">Mostly. I'm aware but I don't have a reliable strategy.</div></div>
+          <div class="option" onclick="selectOption(this,8,3)"><div class="option-score">3</div><div class="option-text">Usually. I make decent choices most of the time.</div></div>
+          <div class="option" onclick="selectOption(this,8,4)"><div class="option-score">4</div><div class="option-text">Rarely an issue. I navigate those situations without losing ground.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: Body Composition Awareness -->
+    <div id="cat-3" class="category-block" style="display:none">
+      <div class="section-header">
+        <p class="section-number">Section 04 — Body Composition Awareness</p>
+        <h2 class="section-title">How connected you are to what's actually happening</h2>
+        <p class="section-subtitle">High performers in business have dashboards. Most don't have one for their body.</p>
+      </div>
+
+      <div class="question-block" data-q="9" data-cat="3">
+        <p class="question-text">I have a clear and honest picture of my current body composition and physical health markers.</p>
+        <div class="options">
+          <div class="option" onclick="selectOption(this,9,1)"><div class="option-score">1</div><div class="option-text">No. I avoid the mirror and the scale both.</div></div>
+          <div class="option" onclick="selectOption(this,9,2)"><div class="option-score">2</div><div class="option-text">Vaguely. I know things have slipped but I'm not tracking it.</div></div>
+          <div class="option" onclick="selectOption(this,9,3)"><div class="option-score">3</div><div class="option-text">Somewhat. I check in occasionally but don't have a real system.</div></div>
+          <div class="option" onclick="selectOption(this,9,4)"><div class="option-score">4</div><div class="option-text">Yes. I track key metrics and know exactly where I stand.</div></div>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <div class="question-block" data-q="10" data-cat="3">
+        <p class="question-text">My physical condition affects how I show up in professional settings — confidence, presence, how I'm perceived.</p>
+        <div class="options">
+          <div class="option" onclick="selectOption(this,10,1)"><div class="option-score">1</div><div class="option-text">Significantly. I'm self-conscious in ways I wasn't 5 years ago.</div></div>
+          <div class="option" onclick="selectOption(this,10,2)"><div class="option-score">2</div><div class="option-text">Somewhat. There are moments where it affects my confidence.</div></div>
+          <div class="option" onclick="selectOption(this,10,3)"><div class="option-score">3</div><div class="option-text">Occasionally. It's a background noise I'm aware of.</div></div>
+          <div class="option" onclick="selectOption(this,10,4)"><div class="option-score">4</div><div class="option-text">Minimally. My physical presence supports how I want to lead.</div></div>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <div class="question-block" data-q="11" data-cat="3">
+        <p class="question-text">I understand the connection between my physical health and my cognitive performance at work.</p>
+        <div class="options">
+          <div class="option" onclick="selectOption(this,11,1)"><div class="option-score">1</div><div class="option-text">Not really. I've never thought about it systematically.</div></div>
+          <div class="option" onclick="selectOption(this,11,2)"><div class="option-score">2</div><div class="option-text">Loosely. I know they're related but haven't connected the dots.</div></div>
+          <div class="option" onclick="selectOption(this,11,3)"><div class="option-score">3</div><div class="option-text">Mostly. I can feel the difference but haven't built around it.</div></div>
+          <div class="option" onclick="selectOption(this,11,4)"><div class="option-score">4</div><div class="option-text">Clearly. I treat my body as a performance asset and manage it accordingly.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: Sustainability Track Record -->
+    <div id="cat-4" class="category-block" style="display:none">
+      <div class="section-header">
+        <p class="section-number">Section 05 — Sustainability Track Record</p>
+        <h2 class="section-title">Whether what you've tried has actually stuck</h2>
+        <p class="section-subtitle">The pattern matters more than any single attempt.</p>
+      </div>
+
+      <div class="question-block" data-q="12" data-cat="4">
+        <p class="question-text">When I think about past fitness programs I've started, most have lasted longer than 3 months.</p>
+        <div class="options">
+          <div class="option" onclick="selectOption(this,12,1)"><div class="option-score">1</div><div class="option-text">No. Most die within the first few weeks.</div></div>
+          <div class="option" onclick="selectOption(this,12,2)"><div class="option-score">2</div><div class="option-text">Rarely. I've had a few runs but nothing that truly stuck.</div></div>
+          <div class="option" onclick="selectOption(this,12,3)"><div class="option-score">3</div><div class="option-text">Sometimes. I've had stretches that worked until life intervened.</div></div>
+          <div class="option" onclick="selectOption(this,12,4)"><div class="option-score">4</div><div class="option-text">Yes. I've maintained habits that held through real-life conditions.</div></div>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <div class="question-block" data-q="13" data-cat="4">
+        <p class="question-text">The programs I've tried in the past were built for my schedule and life — not a generic template.</p>
+        <div class="options">
+          <div class="option" onclick="selectOption(this,13,1)"><div class="option-score">1</div><div class="option-text">No. I've tried generic programs that never really fit my reality.</div></div>
+          <div class="option" onclick="selectOption(this,13,2)"><div class="option-score">2</div><div class="option-text">Somewhat. I've modified things but still fought the mismatch.</div></div>
+          <div class="option" onclick="selectOption(this,13,3)"><div class="option-score">3</div><div class="option-text">Usually. I've had some personalization but it could go further.</div></div>
+          <div class="option" onclick="selectOption(this,13,4)"><div class="option-score">4</div><div class="option-text">Yes. I've worked with approaches designed around my actual constraints.</div></div>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <div class="question-block" data-q="14" data-cat="4">
+        <p class="question-text">I believe I could sustain a serious fitness commitment right now — given everything on my plate.</p>
+        <div class="options">
+          <div class="option" onclick="selectOption(this,14,1)"><div class="option-score">1</div><div class="option-text">No. The timing feels impossible with my current workload.</div></div>
+          <div class="option" onclick="selectOption(this,14,2)"><div class="option-score">2</div><div class="option-text">Doubtful. I want to but I don't trust myself to follow through.</div></div>
+          <div class="option" onclick="selectOption(this,14,3)"><div class="option-score">3</div><div class="option-text">Possibly. If the approach was right, I think I could do it.</div></div>
+          <div class="option" onclick="selectOption(this,14,4)"><div class="option-score">4</div><div class="option-text">Yes. I'm ready. I just need the right system and accountability.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="unanswered-note" id="unanswered-note"></p>
+    <div class="nav-buttons">
+      <button class="btn-back" id="btn-back" onclick="goBack()" style="display:none">← Back</button>
+      <div style="margin-left:auto">
+        <button class="btn-next" id="btn-next" onclick="goNext()">Continue →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMAIL CAPTURE -->
+  <div class="section" id="screen-email">
+    <div class="email-screen">
+      <p class="intro-eyebrow" style="margin-bottom:16px">Your audit is complete</p>
+      <h2>Your results are ready.</h2>
+      <p>Enter your name and email to see your full score, your performance archetype, and exactly where to focus first.</p>
+
+      <div class="score-preview">
+        <div>
+          <p class="score-preview-label">Your Score</p>
+          <p class="score-preview-value" id="preview-score">—</p>
+          <p class="score-preview-total">out of 60</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="input-name">First Name</label>
+        <input type="text" id="input-name" placeholder="Your first name" autocomplete="given-name">
+      </div>
+      <div class="form-group">
+        <label for="input-email">Email Address</label>
+        <input type="email" id="input-email" placeholder="your@email.com" autocomplete="email">
+      </div>
+      <button class="btn-submit" onclick="submitResults()">Show My Results →</button>
+      <p class="privacy-note">No spam. Just your results and one follow-up email from Anchor 1211.</p>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="section" id="screen-results">
+    <div class="results-screen">
+      <div class="archetype-badge" id="archetype-badge">Loading...</div>
+      <h2 id="archetype-title">Your archetype</h2>
+      <p class="archetype-desc" id="archetype-desc">Loading description...</p>
+
+      <div class="score-ring-wrap">
+        <div class="score-ring">
+          <svg width="140" height="140" viewBox="0 0 140 140">
+            <circle cx="70" cy="70" r="58" fill="none" stroke="#1e1c19" stroke-width="8"/>
+            <circle cx="70" cy="70" r="58" fill="none" stroke="#c9b99a" stroke-width="8"
+              stroke-dasharray="364.4"
+              stroke-dashoffset="364.4"
+              stroke-linecap="round"
+              id="ring-circle"/>
+          </svg>
+          <div class="score-ring-text">
+            <span class="score-ring-number" id="ring-score">0</span>
+            <span class="score-ring-label">/ 60</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-scores" id="cat-scores-display"></div>
+
+      <div class="cta-box">
+        <h3>Ready to close the gap?</h3>
+        <p>Book a free 30-minute Executive Performance Call. We'll look at your results together, identify your biggest leverage point, and map out exactly what working together looks like.</p>
+        <a href="https://cal.com/anchor1211/longevityconsult" target="_blank" class="btn-cta">Book My Free Performance Call</a>
+      </div>
+
+      <p style="font-size: 13px; color: #4a4540; margin-top: 16px; line-height: 1.6;">
+        Check your inbox — your full results breakdown and next steps are on their way from Anchor 1211.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>© 2025 Anchor 1211 &nbsp;·&nbsp; Executive Fitness Coaching &nbsp;·&nbsp; anchor1211.com</p>
+</div>
+
+<script>
+const scores = new Array(15).fill(0);
+const catNames = ['Energy & Recovery','Movement Consistency','Nutrition Under Pressure','Body Composition Awareness','Sustainability Track Record'];
+let currentCat = 0;
+let totalAnswered = 0;
+
+const archetypes = [
+  { min: 0, max: 20, badge: "The Deferred Athlete", title: "You have put your body last for too long.", desc: "You know what you are capable of. But somewhere between building your career and running your life, your physical edge got deferred. The cost is showing up in your energy, your focus, and quietly, in how you carry yourself. This is fixable. But it requires a system built for your life, not willpower." },
+  { min: 21, max: 35, badge: "The Overachiever Running on Empty", title: "High output. Unsustainable fuel source.", desc: "You are producing at a high level, but you are running on fumes. Your drive compensates for what your body is not providing and it works, until it does not. You have probably had stretches where things clicked. The problem is not discipline. It is that the approach you are using was not designed for someone operating at your pace." },
+  { min: 36, max: 48, badge: "The Inconsistent Operator", title: "The system works. It just does not hold.", desc: "You have more figured out than most. You understand the connection between physical performance and professional performance. What breaks down is consistency under real pressure. Travel, high-stress stretches, competing demands. You need a framework that anticipates disruption instead of collapsing under it." },
+  { min: 49, max: 60, badge: "The High-Performance Anchor", title: "You have built a foundation. Now optimize it.", desc: "You are operating at a level most executives never reach. Your physical health is an intentional asset, not an afterthought. The opportunity now is precision. Dialing in recovery, performance nutrition, and sustainable load management to stay at this level for the next decade, not just the next quarter." }
+];
+
+function startAudit() {
+  showSection('screen-questions');
+  updateProgress();
+}
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function showCat(idx) {
+  document.querySelectorAll('.category-block').forEach(c => c.style.display = 'none');
+  document.getElementById('cat-' + idx).style.display = 'block';
+  document.getElementById('btn-back').style.display = idx === 0 ? 'none' : 'block';
+  updateProgress();
+  checkSectionComplete();
+}
+
+function selectOption(el, qIdx, val) {
+  const block = el.closest('.question-block');
+  block.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  const wasAnswered = scores[qIdx] > 0;
+  scores[qIdx] = val;
+  if (!wasAnswered) {
+    totalAnswered++;
+  }
+  updateProgress();
+  checkSectionComplete();
+}
+
+function updateProgress() {
+  const pct = (totalAnswered / 15) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = 'Section ' + (currentCat + 1) + ' of 5';
+  document.getElementById('question-count').textContent = totalAnswered + ' of 15 answered';
+}
+
+function checkSectionComplete() {
+  const startQ = currentCat * 3;
+  const allDone = scores[startQ] > 0 && scores[startQ+1] > 0 && scores[startQ+2] > 0;
+  const btn = document.getElementById('btn-next');
+  btn.classList.toggle('enabled', allDone);
+  const note = document.getElementById('unanswered-note');
+  note.textContent = allDone ? '' : 'Answer all 3 questions to continue.';
+}
+
+function goNext() {
+  if (currentCat < 4) {
+    currentCat++;
+    showCat(currentCat);
+    window.scrollTo(0,0);
+  } else {
+    const total = scores.reduce((a,b) => a+b, 0);
+    document.getElementById('preview-score').textContent = total;
+    showSection('screen-email');
+  }
+}
+
+function goBack() {
+  if (currentCat > 0) {
+    currentCat--;
+    showCat(currentCat);
+    window.scrollTo(0,0);
+  }
+}
+
+function getArchetype(score) {
+  return archetypes.find(a => score >= a.min && score <= a.max) || archetypes[0];
+}
+
+function submitResults() {
+  const name = document.getElementById('input-name').value.trim();
+  const email = document.getElementById('input-email').value.trim();
+  if (!name || !email || !email.includes('@')) {
+    alert('Please enter your name and a valid email address.');
+    return;
+  }
+
+  const total = scores.reduce((a,b) => a+b, 0);
+  const arch = getArchetype(total);
+
+  document.getElementById('archetype-badge').textContent = arch.badge;
+  document.getElementById('archetype-title').textContent = arch.title;
+  document.getElementById('archetype-desc').textContent = arch.desc;
+  document.getElementById('ring-score').textContent = total;
+
+  const circumference = 364.4;
+  const offset = circumference - (total / 60) * circumference;
+  const circle = document.getElementById('ring-circle');
+  circle.style.transition = 'stroke-dashoffset 1.2s ease';
+  setTimeout(() => { circle.style.strokeDashoffset = offset; }, 100);
+
+  const catDisplay = document.getElementById('cat-scores-display');
+  catDisplay.innerHTML = '';
+  for (let i = 0; i < 5; i++) {
+    const catScore = scores[i*3] + scores[i*3+1] + scores[i*3+2];
+    const pct = (catScore / 12) * 100;
+    const tier = pct < 40 ? 'low' : pct < 70 ? 'mid' : 'high';
+    catDisplay.innerHTML += `
+      <div class="cat-score-card">
+        <p class="cat-score-name">${catNames[i]}</p>
+        <div class="cat-score-bar-wrap"><div class="cat-score-bar ${tier}" style="width:${pct}%"></div></div>
+        <p class="cat-score-val">${catScore} / 12</p>
+      </div>`;
+  }
+
+  try {
+    fetch('https://api.kit.com/v4/subscribers', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer kit_6429743954ac8ad9fd26083129753fb4'
+      },
+      body: JSON.stringify({
+        email_address: email,
+        first_name: name
+      })
+    }).catch(() => {});
+  } catch(e) {}
+
+  showSection('screen-results');
+  setTimeout(() => { circle.style.strokeDashoffset = offset; }, 200);
+}
+</script>
+</body>
+</html>
